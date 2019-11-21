@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewCategoriaLocalizacao"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.activities.CategoriaLocalizacaoActivity">
+
+    <Button
+        android:id="@+id/activity_cat_loc_botao_avancar"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/botao_arredondado_verde"
+        android:text="Avançar"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_autor_dano"
+        app:layout_constraintTop_toTopOf="@+id/activity_cat_loc_botao_voltar" />
+
+    <Button
+        android:id="@+id/activity_cat_loc_botao_voltar"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/botao_arredondado_verde"
+        android:text="Voltar"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_autor_dano"
+        app:layout_constraintTop_toBottomOf="@+id/activity_cat_loc_autor_dano"
+        app:layout_constraintVertical_bias="0.835" />
+
+    <EditText
+        android:id="@+id/activity_cat_loc_endereco"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ "
+        android:hint="rua, avenida, etc"
+        android:maxLength="10"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_spinner_cidade"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_spinner_cidade"
+        app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_spinner_cidade" />
+
+    <EditText
+        android:id="@+id/activity_cat_loc_cep"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ "
+        android:hint="cep"
+        android:maxLength="10"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_endereco"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_endereco"
+        app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_endereco" />
+
+    <EditText
+        android:id="@+id/activity_cat_loc_latitude"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ "
+        android:hint="latitude"
+        android:maxLength="10"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_cep"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_cep"
+        app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_cep" />
+
+
+    <EditText
+        android:id="@+id/activity_cat_loc_longitude"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ "
+        android:hint="longitude"
+        android:maxLength="10"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_latitude"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_latitude"
+        app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_latitude" />
+
+
+    <EditText
+        android:id="@+id/activity_cat_loc_autor_dano"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:digits="abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ "
+        android:hint="autor do dano"
+        android:maxLength="10"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_longitude"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_longitude"
+        app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_longitude" />
+
+
+    <Spinner
+        android:id="@+id/activity_cat_loc_spinner_cidade"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:tag="spinnerCidadeTag"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_spinner_categorias"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_spinner_categorias"
+        app:layout_constraintTop_toBottomOf="@+id/activity_cat_loc_spinner_categorias"
+        app:layout_constraintVertical_bias="0.508">
+
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/activity_cat_loc_spinner_categorias"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:tag="spinnerCategoriaTag"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.099">
+
+    </Spinner>
+
+    <Button
+        android:id="@+id/activity_cat_loc_botao_futuromapa"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:background="@drawable/botao_arredondado_verde"
+        android:text="FUTURO MAPA"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/activity_cat_loc_spinner_cidade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_cat_loc_spinner_categorias"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <TextView
+        android:id="@+id/activity_cat_loc_seleciona_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione uma categoria"
+        app:layout_constraintBottom_toTopOf="@+id/activity_cat_loc_spinner_categorias"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_cat_loc_seleciona_cidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selecione uma cidade"
+        app:layout_constraintBottom_toTopOf="@+id/activity_cat_loc_spinner_cidade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_cat_loc_botao_futuromapa"
+        app:layout_constraintVertical_bias="0.116" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

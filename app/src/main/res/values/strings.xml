@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SinosiNovo</string>
+
+    <string name="title_activity_maps">Map</string>
+    <string-array name="array_categorias">
+        <item>AGUA</item>
+        <item>AR</item>
+        <item>FAUNA</item>
+        <item>FOGO</item>
+        <item>OUTROS</item>
+        <item>RUÍDO</item>
+        <item>SOLO</item>
+        <item>VEGETAÇÃO</item>
+    </string-array>
+</resources>
