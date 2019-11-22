@@ -14,7 +14,7 @@ public class Denuncia implements Serializable {
     private LocalAcidente localAcidente;
     private String descricao;
     private Date dataDenuncia;
-    private String caminhoDaFoto = null;
+    private byte[] foto = null;
     private String autorDano = "não identificado";
     private String emailUsuario = "email@email.com";
     private String categoria;
@@ -62,12 +62,12 @@ public class Denuncia implements Serializable {
         this.dataDenuncia = dataDenuncia;
     }
 
-    public String getCaminhoDaFoto() {
-        return caminhoDaFoto;
+    public byte[] getFoto() {
+        return foto;
     }
 
-    public void setCaminhoDaFoto(String caminhoDaFoto) {
-        this.caminhoDaFoto = caminhoDaFoto;
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     public String getAutorDano() {
@@ -100,7 +100,6 @@ public class Denuncia implements Serializable {
                 "localAcidente=" + localAcidente +
                 ", descricao='" + descricao + '\'' +
                 ", dataDenuncia=" + dataDenuncia +
-                ", caminhoDaFoto='" + caminhoDaFoto + '\'' +
                 ", autorDano='" + autorDano + '\'' +
                 ", emailUsuario='" + emailUsuario + '\'' +
                 ", categoria='" + categoria + '\'' +

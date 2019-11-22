@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,12 +57,13 @@ public class ResumoActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call call, Response response) {
                 Log.i("onResponse", "sucesso");
+                Toast.makeText(getApplicationContext(), "Denúncia enviada com sucesso!", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
                 Log.e("onFailure", t.getMessage());
-
+                Toast.makeText(getApplicationContext(), "Não foi possível enviar a denúncia. Por favor, verifique sua conexão.", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -69,7 +72,7 @@ public class ResumoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Denuncia denuncia = (Denuncia) intent.getSerializableExtra("denuncia");
-        System.out.println("Foto: " + denuncia.getCaminhoDaFoto());
+        System.out.println("Foto: " + denuncia.getFoto());
         return denuncia;
     }
 

@@ -73,7 +73,6 @@ public class DescricaoActivity extends AppCompatActivity {
     private Denuncia pegarDenuncia() {
 
         Intent intent = getIntent();
-
         Denuncia denuncia = (Denuncia) intent.getSerializableExtra("denuncia");
 
         System.out.println(denuncia.getCategoria());
@@ -83,7 +82,6 @@ public class DescricaoActivity extends AppCompatActivity {
         descricaoEdit.setMaxLines(10);
         String descricaoString = descricaoEdit.getText().toString();
         denuncia.setDescricao(descricaoString);
-        //System.out.println("na atividade de descricao: "+denuncia);
         return denuncia;
     }
 
@@ -109,11 +107,6 @@ public class DescricaoActivity extends AppCompatActivity {
 
     // MÉTODOS PARA SEPARAR DEPOIS, TESTE DE CAMERA
     // MÉTODOS PARA SEPARAR DEPOIS, TESTE DE CAMERA
-    // MÉTODOS PARA SEPARAR DEPOIS, TESTE DE CAMERA
-    // MÉTODOS PARA SEPARAR DEPOIS, TESTE DE CAMERA
-    // MÉTODOS PARA SEPARAR DEPOIS, TESTE DE CAMERA
-    // MÉTODOS PARA SEPARAR DEPOIS, TESTE DE CAMERA
-
 
     private void getPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
@@ -151,8 +144,6 @@ public class DescricaoActivity extends AppCompatActivity {
             }
 
             if (photoFile != null) {
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-//                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
                 Uri uri = FileProvider.getUriForFile(getBaseContext(), getBaseContext().getApplicationContext().getPackageName() + ".provider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
@@ -175,6 +166,7 @@ public class DescricaoActivity extends AppCompatActivity {
             }
         }
     }
+
 
 
 }
