@@ -1,7 +1,5 @@
 package com.lf.sinosinovo.model;
 
-import android.media.Image;
-
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -16,7 +14,7 @@ public class Denuncia implements Serializable {
     private LocalAcidente localAcidente;
     private String descricao;
     private Date dataDenuncia;
-    private Image foto = null;
+    private String caminhoDaFoto = null;
     private String autorDano = "não identificado";
     private String emailUsuario = "email@email.com";
     private String categoria;
@@ -30,30 +28,6 @@ public class Denuncia implements Serializable {
 
     public Denuncia() {
 
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Date getDataDenuncia() {
-        return dataDenuncia;
-    }
-
-    public void setDataDenuncia(Date dataDenuncia) {
-        this.dataDenuncia = dataDenuncia;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 
     public Integer getId() {
@@ -72,6 +46,30 @@ public class Denuncia implements Serializable {
         this.localAcidente = localAcidente;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Date getDataDenuncia() {
+        return dataDenuncia;
+    }
+
+    public void setDataDenuncia(Date dataDenuncia) {
+        this.dataDenuncia = dataDenuncia;
+    }
+
+    public String getCaminhoDaFoto() {
+        return caminhoDaFoto;
+    }
+
+    public void setCaminhoDaFoto(String caminhoDaFoto) {
+        this.caminhoDaFoto = caminhoDaFoto;
+    }
+
     public String getAutorDano() {
         return autorDano;
     }
@@ -88,18 +86,21 @@ public class Denuncia implements Serializable {
         this.emailUsuario = emailUsuario;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
 
-    public Image getFoto() {
-        return foto;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     @Override
     public String toString() {
         return "Denuncia{" +
-                "id=" + id +
-                ", localAcidente=" + localAcidente +
+                "localAcidente=" + localAcidente +
                 ", descricao='" + descricao + '\'' +
                 ", dataDenuncia=" + dataDenuncia +
+                ", caminhoDaFoto='" + caminhoDaFoto + '\'' +
                 ", autorDano='" + autorDano + '\'' +
                 ", emailUsuario='" + emailUsuario + '\'' +
                 ", categoria='" + categoria + '\'' +

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import com.lf.sinosinovo.R;
 import com.lf.sinosinovo.model.Denuncia;
@@ -30,7 +31,7 @@ public class DescricaoActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
-    static String mCurrentPhotoPath;
+    static String caminhoDaFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,15 +144,19 @@ public class DescricaoActivity extends AppCompatActivity {
             File photoFile = null;
             try {
                 File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                photoFile = File.createTempFile("foto_sinosi", ".jpg", storageDir);
-                mCurrentPhotoPath = "file:" + photoFile.getAbsolutePath();
+                photoFile = File.createTempFile("foto_sinosi" + " - " + System.currentTimeMillis(), ".jpg", storageDir);
+                caminhoDaFoto = "file:" + photoFile.getAbsolutePath();
             } catch (IOException ex) {
                 Toast.makeText(getApplicationContext(), "Erro ao tirar a foto", Toast.LENGTH_SHORT).show();
             }
 
             if (photoFile != null) {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+//                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+                Uri uri = FileProvider.getUriForFile(getBaseContext(), getBaseContext().getApplicationContext().getPackageName() + ".provider", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+
             }
         }
     }
@@ -163,7 +168,7 @@ public class DescricaoActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             try {
                 ImageView imagem = (ImageView) findViewById(R.id.activity_descricao_imagem);
-                Bitmap bm1 = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(mCurrentPhotoPath)));
+                Bitmap bm1 = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(caminhoDaFoto)));
                 imagem.setImageBitmap(bm1);
             } catch (FileNotFoundException fnex) {
                 Toast.makeText(getApplicationContext(), "Foto não encontrada!", Toast.LENGTH_LONG).show();

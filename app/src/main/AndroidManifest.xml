@@ -11,6 +11,16 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+        <provider
+            android:name=".provider.GenericFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity android:name=".ui.activities.DescricaoActivity"></activity>
         <activity android:name=".ui.activities.ResumoActivity" />
         <activity android:name=".ui.activities.CategoriaLocalizacaoActivity" />

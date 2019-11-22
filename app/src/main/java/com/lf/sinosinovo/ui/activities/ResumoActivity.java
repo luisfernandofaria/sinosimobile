@@ -69,6 +69,7 @@ public class ResumoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Denuncia denuncia = (Denuncia) intent.getSerializableExtra("denuncia");
+        System.out.println("Foto: " + denuncia.getCaminhoDaFoto());
         return denuncia;
     }
 
