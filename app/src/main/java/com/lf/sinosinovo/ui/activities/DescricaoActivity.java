@@ -29,9 +29,9 @@ import java.io.IOException;
 
 public class DescricaoActivity extends AppCompatActivity {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_TAKE_PHOTO = 1;
-    static String caminhoDaFoto;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_TAKE_PHOTO = 1;
+    private static String caminhoDaFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,6 @@ public class DescricaoActivity extends AppCompatActivity {
         });
     }
 
-
     private Denuncia pegarDenuncia() {
 
         Intent intent = getIntent();
@@ -82,6 +81,8 @@ public class DescricaoActivity extends AppCompatActivity {
         descricaoEdit.setMaxLines(10);
         String descricaoString = descricaoEdit.getText().toString();
         denuncia.setDescricao(descricaoString);
+        denuncia.setCaminhoDaFoto(caminhoDaFoto);
+        System.out.println("caminho da foto na activity de descricao: "+ caminhoDaFoto);
         return denuncia;
     }
 
@@ -137,7 +138,7 @@ public class DescricaoActivity extends AppCompatActivity {
             File photoFile = null;
             try {
                 File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                photoFile = File.createTempFile("foto_sinosi" + " - " + System.currentTimeMillis(), ".jpg", storageDir);
+                photoFile = File.createTempFile("foto_sinosi" + System.currentTimeMillis(), ".jpg", storageDir);
                 caminhoDaFoto = "file:" + photoFile.getAbsolutePath();
             } catch (IOException ex) {
                 Toast.makeText(getApplicationContext(), "Erro ao tirar a foto", Toast.LENGTH_SHORT).show();
@@ -147,7 +148,6 @@ public class DescricaoActivity extends AppCompatActivity {
                 Uri uri = FileProvider.getUriForFile(getBaseContext(), getBaseContext().getApplicationContext().getPackageName() + ".provider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
-
             }
         }
     }
@@ -158,7 +158,7 @@ public class DescricaoActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             try {
-                ImageView imagem = (ImageView) findViewById(R.id.activity_descricao_imagem);
+                ImageView imagem = findViewById(R.id.activity_descricao_imagem);
                 Bitmap bm1 = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.parse(caminhoDaFoto)));
                 imagem.setImageBitmap(bm1);
             } catch (FileNotFoundException fnex) {

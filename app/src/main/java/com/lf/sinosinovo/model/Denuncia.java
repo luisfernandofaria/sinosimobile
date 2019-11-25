@@ -12,12 +12,12 @@ public class Denuncia implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private Integer id; //adicionar depois
     private LocalAcidente localAcidente;
-    private String descricao;
+    private String descricao= "descricao";
     private Date dataDenuncia;
-    private byte[] foto = null;
+    private String caminhoDaFoto = "caminho";
     private String autorDano = "não identificado";
     private String emailUsuario = "email@email.com";
-    private String categoria;
+    private String categoria = "a";
 
     public Denuncia(LocalAcidente localAcidente, Date data, String autorDano, String categoria) {
         this.localAcidente = localAcidente;
@@ -62,12 +62,12 @@ public class Denuncia implements Serializable {
         this.dataDenuncia = dataDenuncia;
     }
 
-    public byte[] getFoto() {
-        return foto;
+    public String getCaminhoDaFoto() {
+        return caminhoDaFoto;
     }
 
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
+    public void setCaminhoDaFoto(String caminhoDaFoto) {
+        this.caminhoDaFoto = caminhoDaFoto;
     }
 
     public String getAutorDano() {
@@ -97,9 +97,11 @@ public class Denuncia implements Serializable {
     @Override
     public String toString() {
         return "Denuncia{" +
-                "localAcidente=" + localAcidente +
+                "id=" + id +
+                ", localAcidente=" + localAcidente +
                 ", descricao='" + descricao + '\'' +
                 ", dataDenuncia=" + dataDenuncia +
+                ", caminhoDaFoto='" + caminhoDaFoto + '\'' +
                 ", autorDano='" + autorDano + '\'' +
                 ", emailUsuario='" + emailUsuario + '\'' +
                 ", categoria='" + categoria + '\'' +

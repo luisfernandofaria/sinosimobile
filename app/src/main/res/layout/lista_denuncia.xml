@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -60,5 +61,17 @@
         app:layout_constraintEnd_toEndOf="@+id/lista_denuncia_descricao"
         app:layout_constraintStart_toStartOf="@+id/lista_denuncia_descricao"
         app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_descricao" />
+
+    <ImageView
+        android:id="@+id/lista_denuncia_foto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_data"
+        app:layout_constraintVertical_bias="0.111"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

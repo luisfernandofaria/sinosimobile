@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.ResumoActivity">
 
-    <ListView
-        android:id="@+id/activity_resumo_list_view_lista_denuncia"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_resumo_lista_denuncia_recycler_view"
         android:layout_width="280dp"
         android:layout_height="429dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
