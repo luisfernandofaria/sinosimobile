@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lf.sinosinovo.R;
 import com.lf.sinosinovo.model.Denuncia;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -53,6 +55,7 @@ public class ListaDenunciaAdapter extends RecyclerView.Adapter<ListaDenunciaAdap
         private final TextView autorDano;
         private final TextView descricao;
         private final TextView data;
+        private final ImageView foto;
 
         public DenunciaViewHolder(View itemView) {
             super(itemView);
@@ -62,6 +65,7 @@ public class ListaDenunciaAdapter extends RecyclerView.Adapter<ListaDenunciaAdap
             autorDano = itemView.findViewById(R.id.lista_denuncia_autor);
             descricao = itemView.findViewById(R.id.lista_denuncia_descricao);
             data = itemView.findViewById(R.id.lista_denuncia_data);
+            foto = itemView.findViewById(R.id.lista_denuncia_foto);
         }
 
         private void vincularDenuncia(Denuncia denuncia) {
@@ -70,6 +74,7 @@ public class ListaDenunciaAdapter extends RecyclerView.Adapter<ListaDenunciaAdap
             localDoAcidente.setText(denuncia.getLocalAcidente().getMunicipio().getNome());
             autorDano.setText(denuncia.getAutorDano());
             descricao.setText(denuncia.getDescricao());
+            Picasso.get().load(denuncia.getCaminhoDaFoto()).into(foto);
 
             SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             data.setText(dataFormatada.format(denuncia.getDataDenuncia()));

@@ -82,7 +82,7 @@ public class DescricaoActivity extends AppCompatActivity {
         String descricaoString = descricaoEdit.getText().toString();
         denuncia.setDescricao(descricaoString);
         denuncia.setCaminhoDaFoto(caminhoDaFoto);
-        System.out.println("caminho da foto na activity de descricao: "+ caminhoDaFoto);
+
         return denuncia;
     }
 

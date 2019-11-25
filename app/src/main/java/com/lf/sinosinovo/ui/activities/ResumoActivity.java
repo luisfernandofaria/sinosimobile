@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.lf.sinosinovo.R;
 import com.lf.sinosinovo.model.Denuncia;
 import com.lf.sinosinovo.retrofit.RetrofitConfig;
 import com.lf.sinosinovo.ui.adapters.ListaDenunciaAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,17 +76,7 @@ public class ResumoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Denuncia denuncia = (Denuncia) intent.getSerializableExtra("denuncia");
-//        System.out.println("Foto na tela de resumo: " + denuncia.getCaminhoDaFoto());
-//
-//        String caminhoFoto = "/storage/emulated/0/Pictures/foto_sinosi15744797725588195568334378744374.jpg";
-//
-//        Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
-//        Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bitmap,300,300,true);
-//        ImageView foto = new ImageView(this);
-//        foto.setImageBitmap(bitmapReduzido);;
-//        foto.setScaleType(ImageView.ScaleType.FIT_XY);
-//        foto.setTag(caminhoFoto);
-
+        System.out.println("Foto na tela de resumo: " + denuncia.getCaminhoDaFoto());
         return denuncia;
     }
 
