@@ -1,33 +1,21 @@
 package com.lf.sinosinovo.ui.activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lf.sinosinovo.R;
 import com.lf.sinosinovo.model.Denuncia;
 import com.lf.sinosinovo.retrofit.RetrofitConfig;
 import com.lf.sinosinovo.ui.adapters.ListaDenunciaAdapter;
-import com.lf.sinosinovo.ui.adapters.ListaDenunciaAdapterNovo;
-import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,7 +111,7 @@ public class ResumoActivity extends AppCompatActivity {
     }
 
     private void configurarAdapter(RecyclerView listaDeDenuncias, List<Denuncia> denuncias) {
-        listaDeDenuncias.setAdapter(new ListaDenunciaAdapterNovo(this, denuncias));
+        listaDeDenuncias.setAdapter(new ListaDenunciaAdapter(this, denuncias));
     }
 
 }

@@ -4,8 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.lf.sinosinovo.R;
 import com.lf.sinosinovo.model.Denuncia;
@@ -13,24 +14,26 @@ import com.lf.sinosinovo.model.Denuncia;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ListaDenunciaAdapter extends BaseAdapter {
+public class ListaDenunciaAdapter extends RecyclerView.Adapter<ListaDenunciaAdapter.DenunciaViewHolder> {
 
     private final List<Denuncia> denuncias;
     private final Context context;
 
-    public ListaDenunciaAdapter(List<Denuncia> denuncias, Context context) {
-        this.denuncias = denuncias;
+    public ListaDenunciaAdapter(Context context, List<Denuncia> denuncias) {
         this.context = context;
+        this.denuncias = denuncias;
     }
 
     @Override
-    public int getCount() {
-        return denuncias.size();
+    public ListaDenunciaAdapter.DenunciaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.lista_denuncia, parent, false);
+        return new DenunciaViewHolder(view);
     }
 
     @Override
-    public Denuncia getItem(int position) {
-        return denuncias.get(position);
+    public void onBindViewHolder(ListaDenunciaAdapter.DenunciaViewHolder holder, int position) {
+        Denuncia denuncia = denuncias.get(position);
+        holder.vincularDenuncia(denuncia);
     }
 
     @Override
@@ -39,44 +42,39 @@ public class ListaDenunciaAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        View view = LayoutInflater.from(context).inflate(R.layout.lista_denuncia, parent, false);
-
-        Denuncia denuncia = denuncias.get(position);
-
-        pegarCategoria(view, denuncia);
-        pegarLocal(view, denuncia);
-        pegarAutor(view, denuncia);
-        pegarDescricao(view, denuncia);
-        pegarData(view, denuncia);
-
-        return view;
+    public int getItemCount() {
+        return denuncias.size();
     }
 
-    private void pegarCategoria(View view, Denuncia denuncia) {
-        TextView categoria = view.findViewById(R.id.lista_denuncia_categoria);
-        categoria.setText(denuncia.getCategoria());
+    class DenunciaViewHolder extends RecyclerView.ViewHolder {
+
+        private final TextView categoria;
+        private final TextView localDoAcidente;
+        private final TextView autorDano;
+        private final TextView descricao;
+        private final TextView data;
+
+        public DenunciaViewHolder(View itemView) {
+            super(itemView);
+
+            categoria = itemView.findViewById(R.id.lista_denuncia_categoria);
+            localDoAcidente = itemView.findViewById(R.id.lista_denuncia_localizacao);
+            autorDano = itemView.findViewById(R.id.lista_denuncia_autor);
+            descricao = itemView.findViewById(R.id.lista_denuncia_descricao);
+            data = itemView.findViewById(R.id.lista_denuncia_data);
+        }
+
+        private void vincularDenuncia(Denuncia denuncia) {
+
+            categoria.setText(denuncia.getCategoria());
+            localDoAcidente.setText(denuncia.getLocalAcidente().getMunicipio().getNome());
+            autorDano.setText(denuncia.getAutorDano());
+            descricao.setText(denuncia.getDescricao());
+
+            SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            data.setText(dataFormatada.format(denuncia.getDataDenuncia()));
+        }
+
     }
 
-    private void pegarLocal(View view, Denuncia denuncia) {
-        TextView local = view.findViewById(R.id.lista_denuncia_localizacao);
-        local.setText(denuncia.getLocalAcidente().getMunicipio().getNome());
-    }
-
-    private void pegarAutor(View view, Denuncia denuncia) {
-        TextView autor = view.findViewById(R.id.lista_denuncia_autor);
-        autor.setText(denuncia.getAutorDano());
-    }
-
-    private void pegarDescricao(View view, Denuncia denuncia) {
-        TextView categoria = view.findViewById(R.id.lista_denuncia_descricao);
-        categoria.setText(denuncia.getDescricao());
-    }
-
-    private void pegarData(View view, Denuncia denuncia) {
-        TextView data = view.findViewById(R.id.lista_denuncia_data);
-        SimpleDateFormat dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        data.setText(dataFormatada.format(denuncia.getDataDenuncia()));
-    }
 }
