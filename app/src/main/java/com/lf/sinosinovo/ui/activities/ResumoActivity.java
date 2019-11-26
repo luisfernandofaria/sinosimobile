@@ -2,6 +2,7 @@ package com.lf.sinosinovo.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +19,16 @@ import com.lf.sinosinovo.retrofit.RetrofitConfig;
 import com.lf.sinosinovo.ui.adapters.ListaDenunciaAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,10 +55,43 @@ public class ResumoActivity extends AppCompatActivity {
         botaoVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                enviarDenuncia();
+                enviarDenunciaComImagem();
             }
         });
     }
+
+    private void enviarDenunciaComImagem() {
+
+        Denuncia denuncia = recuperarDenuncia();
+
+        String str = denuncia.getCaminhoDaFoto();
+        str = str.substring(5);
+
+        File file = new File (str);
+
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+        Call call = new RetrofitConfig().getDenunciaService().enviarDenunciaComImagem(denuncia, body);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.i("onResponse", "sucesso");
+                Toast.makeText(getApplicationContext(), "Denúncia enviada com sucesso!", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.e("onFailure", t.getMessage());
+                Toast.makeText(getApplicationContext(), "Não foi possível enviar a denúncia. Por favor, verifique sua conexão.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     private void enviarDenuncia() {
 
@@ -76,7 +117,6 @@ public class ResumoActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Denuncia denuncia = (Denuncia) intent.getSerializableExtra("denuncia");
-        System.out.println("Foto na tela de resumo: " + denuncia.getCaminhoDaFoto());
         return denuncia;
     }
 

@@ -31,7 +31,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_autor_dano"
         app:layout_constraintTop_toBottomOf="@+id/activity_cat_loc_autor_dano"
-        app:layout_constraintVertical_bias="0.835" />
+        app:layout_constraintVertical_bias="0.483" />
 
     <EditText
         android:id="@+id/activity_cat_loc_endereco"
@@ -41,6 +41,7 @@
         android:hint="rua, avenida, etc"
         android:maxLength="10"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_spinner_cidade"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_spinner_cidade"
         app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_spinner_cidade" />
@@ -53,6 +54,7 @@
         android:hint="cep"
         android:maxLength="10"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_endereco"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_endereco"
         app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_endereco" />
@@ -65,6 +67,7 @@
         android:hint="latitude"
         android:maxLength="10"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_cep"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_cep"
         app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_cep" />
@@ -78,6 +81,7 @@
         android:hint="longitude"
         android:maxLength="10"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_latitude"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_latitude"
         app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_latitude" />
@@ -91,6 +95,7 @@
         android:hint="autor do dano"
         android:maxLength="10"
         android:textAlignment="center"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_longitude"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_longitude"
         app:layout_constraintTop_toBottomOf="@id/activity_cat_loc_longitude" />
@@ -107,14 +112,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/activity_cat_loc_spinner_categorias"
         app:layout_constraintTop_toBottomOf="@+id/activity_cat_loc_spinner_categorias"
-        app:layout_constraintVertical_bias="0.508">
+        app:layout_constraintVertical_bias="0.447">
 
     </Spinner>
 
     <Spinner
         android:id="@+id/activity_cat_loc_spinner_categorias"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginEnd="50dp"
@@ -125,14 +130,14 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099">
+        app:layout_constraintVertical_bias="0.067">
 
     </Spinner>
 
     <Button
         android:id="@+id/activity_cat_loc_botao_futuromapa"
-        android:layout_width="320dp"
-        android:layout_height="240dp"
+        android:layout_width="300dp"
+        android:layout_height="220dp"
         android:background="@drawable/botao_arredondado_verde"
         android:text="FUTURO MAPA"
         android:textColor="@android:color/white"

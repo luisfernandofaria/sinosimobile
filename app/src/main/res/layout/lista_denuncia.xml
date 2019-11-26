@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Categoria"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Local do acidente"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/lista_denuncia_categoria"
         app:layout_constraintStart_toStartOf="@+id/lista_denuncia_categoria"
         app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_categoria" />
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Autor do dano"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/lista_denuncia_localizacao"
         app:layout_constraintStart_toStartOf="@+id/lista_denuncia_localizacao"
         app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_localizacao" />
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Descrição"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/lista_denuncia_autor"
         app:layout_constraintStart_toStartOf="@+id/lista_denuncia_autor"
         app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_autor" />
@@ -57,12 +57,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Data"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/lista_denuncia_foto"
         app:layout_constraintEnd_toEndOf="@+id/lista_denuncia_descricao"
-        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="@+id/lista_denuncia_descricao"
-        app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_descricao"
-        app:layout_constraintBottom_toTopOf="@+id/lista_denuncia_foto"/>
+        app:layout_constraintTop_toBottomOf="@+id/lista_denuncia_descricao" />
 
     <ImageView
         android:id="@+id/lista_denuncia_foto"

@@ -7,17 +7,17 @@
     tools:context=".ui.activities.AcompanharDenunciaActivity">
 
 
-
-    <ListView
-        android:id="@+id/activity_acomp_denuncia_list_view_lista_denuncia"
-        android:layout_width="280dp"
-        android:layout_height="429dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_acomp_denuncia_recycler_view"
+        android:layout_width="350dp"
+        android:layout_height="460dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.409"
+        app:layout_constraintVertical_bias="0.361"
         tools:listitem="@layout/lista_denuncia" />
 
     <Button
@@ -44,22 +44,22 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.048" />
 
     <EditText
         android:id="@+id/activity_acomp_busca_por_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
+        android:layout_marginTop="36dp"
 
+        android:ems="10"
         android:hint="digite o ID da denúncia"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/activity_acomp_denuncia_list_view_lista_denuncia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.559" />
