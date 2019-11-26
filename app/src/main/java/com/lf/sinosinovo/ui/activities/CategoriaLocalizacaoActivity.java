@@ -1,40 +1,37 @@
 package com.lf.sinosinovo.ui.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.lf.sinosinovo.R;
 import com.lf.sinosinovo.model.Denuncia;
 import com.lf.sinosinovo.model.LocalAcidente;
 import com.lf.sinosinovo.model.Municipio;
+import com.lf.sinosinovo.retrofit.RetrofitConfig;
+import com.lf.sinosinovo.ui.adapters.ListaMunicipioAdapter;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CategoriaLocalizacaoActivity extends AppCompatActivity {
 
     private ArrayAdapter spinnerAdapter;
-    private List<String> listaCidades;
-    private List<String> listaEstados;
     private List<String> listaCategorias;
+    private List<Municipio> listaDeMunicipios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +40,8 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
 
         setTitle("Tipo e Localização");
 
-        popularSpinner();
+        popularSpinnerCategoria();
+        buscarMunicipios();
         configurarBotaoAvancar();
         configuraBotaoVoltar();
     }
@@ -60,7 +58,6 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
         return autorDano.getText().toString();
     }
 
-
     private String pegarCategoria() {
         Spinner spinnerCategoria;
 
@@ -68,7 +65,6 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_layout);
         return spinnerCategoria.getSelectedItem().toString();
     }
-
 
     private LocalAcidente pegarLocalizacaoAcidente() {
 
@@ -92,16 +88,40 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
 
     }
 
+    private void buscarMunicipios() {
+
+        Call<List<Municipio>> call = new RetrofitConfig().getDenunciaService().buscarMunicipios();
+
+        call.enqueue(new Callback<List<Municipio>>() {
+            @Override
+            public void onResponse(Call<List<Municipio>> call, Response<List<Municipio>> response) {
+                Log.i("onResponse", "sucesso ???");
+                popularSpinnerMunicipio(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Municipio>> call, Throwable t) {
+                Log.i("onFailure", "requisição falhou");
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void popularSpinnerMunicipio(List<Municipio> lista) {
+
+        listaDeMunicipios = lista;
+
+        Spinner spinner = findViewById(R.id.activity_cat_loc_spinner_cidade);
+        ListaMunicipioAdapter adapter = new ListaMunicipioAdapter(this,
+                R.layout.spinner_layout, R.id.spinner_modelo_texto, listaDeMunicipios);
+        spinner.setAdapter(adapter);
+    }
+
     private Municipio pegarMunicipio() {
 
         Spinner spinnerMunicipio = findViewById(R.id.activity_cat_loc_spinner_cidade);
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_layout);
-
-        Municipio municipio = new Municipio();
-        municipio.setNome(spinnerMunicipio.getSelectedItem().toString());
-        municipio.setUf("GO");
-        municipio.setCodigo(52);
-
+        Municipio municipio = (Municipio) spinnerMunicipio.getSelectedItem();
         return municipio;
     }
 
@@ -115,7 +135,6 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
     private void configurarBotaoAvancar() {
 
         Button botaoAvancar = findViewById(R.id.activity_cat_loc_botao_avancar);
-
         botaoAvancar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,13 +154,9 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
         });
     }
 
-    private void popularSpinner() {
-
+    private void popularSpinnerCategoria() {
         preencherListas();
-
         configurarSpinner("spinnerCategoriaTag", listaCategorias);
-        configurarSpinner("spinnerCidadeTag", listaCidades);
-//        configurarSpinner("spinnerEstadoTag", listaEstados);
     }
 
     private Spinner configurarSpinner(String tag, List<String> itens) {
@@ -154,44 +169,7 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
     }
 
     private void preencherListas() {
-
-        listaCidades = retornarArrayListComXML("cidades.xml", "CIDADE", "NOME");
-//        listaEstados = retornarArrayListComXML("estados.xml", "ESTADO", "NOME");
         listaCategorias = Arrays.asList(getResources().getStringArray(R.array.array_categorias));
-    }
-
-    private List<String> retornarArrayListComXML(String arquivo, String tag1, String tag2) {
-
-        List<String> listaLocais = new ArrayList<>();
-        try {
-            InputStream is = getAssets().open(arquivo);
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(is);
-
-            Element element = doc.getDocumentElement();
-            element.normalize();
-
-            NodeList nList = doc.getElementsByTagName(tag1);
-
-            for (int i = 0; i < nList.getLength(); i++) {
-                Node node = nList.item(i);
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element2 = (Element) node;
-                    listaLocais.add(getValue(tag2, element2) + "\n");
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return listaLocais;
-    }
-
-    private static String getValue(String tag, Element element) {
-        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
-        Node node = nodeList.item(0);
-        return node.getNodeValue();
     }
 }
 

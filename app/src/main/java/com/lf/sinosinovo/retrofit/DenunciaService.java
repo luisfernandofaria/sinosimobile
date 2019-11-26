@@ -1,6 +1,7 @@
 package com.lf.sinosinovo.retrofit;
 
 import com.lf.sinosinovo.model.Denuncia;
+import com.lf.sinosinovo.model.Municipio;
 
 import java.util.List;
 
@@ -15,16 +16,19 @@ import retrofit2.http.Part;
 
 public interface DenunciaService {
 
-    @GET("listar")
+    @GET("listarDenuncias")
     Call<List<Denuncia>> buscarDenuncias();
 
     @POST("denuncia")
     Call<Void> enviarDenuncia(@Body Denuncia denuncia);
 
     @Multipart
-    @POST("singleSave")
+    @POST("enviarDenuncia")
     Call<ResponseBody> enviarDenunciaComImagem(@Part("denuncia") Denuncia denuncia,
                                                     @Part MultipartBody.Part file);
+
+    @GET("listarMunicipios")
+    Call<List<Municipio>> buscarMunicipios();
 }
 
 

@@ -22,6 +22,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
+
         <provider
             android:name=".provider.GenericFileProvider"
             android:authorities="${applicationId}.provider"
@@ -36,7 +37,6 @@
         <activity android:name=".ui.activities.ResumoActivity" />
         <activity android:name=".ui.activities.CategoriaLocalizacaoActivity" />
         <activity android:name=".ui.activities.AcompanharDenunciaActivity" />
-
         <activity android:name=".ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
