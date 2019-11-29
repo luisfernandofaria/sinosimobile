@@ -25,7 +25,7 @@ public class RetrofitConfig {
                 .create();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.0.16:8080/rest/denuncias/")
+                .baseUrl("https://sinosi.herokuapp.com/rest/denuncias/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client.build())
                 .build();

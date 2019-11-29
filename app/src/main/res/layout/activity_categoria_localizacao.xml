@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:digits="abcdefghijklmnopqrstuvwxyzçABCDEFGHIJKLMNOPQRSTUVWXYZÇ "
         android:hint="rua, avenida, etc"
-        android:maxLength="10"
+        android:maxLength="60"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/activity_cat_loc_spinner_cidade"

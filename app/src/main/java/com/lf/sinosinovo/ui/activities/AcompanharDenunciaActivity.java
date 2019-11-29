@@ -47,22 +47,19 @@ public class AcompanharDenunciaActivity extends AppCompatActivity {
         });
     }
 
-
     private void buscarDenuncias() {
 
         Call<List<Denuncia>> call = new RetrofitConfig().getDenunciaService().buscarDenuncias();
 
-        List<Denuncia> lista = new ArrayList<>();
-
         call.enqueue(new Callback<List<Denuncia>>() {
             @Override
-            public void onResponse(Call<List<Denuncia>> call, Response<List<Denuncia>> response ) {
+            public void onResponse(Call<List<Denuncia>> call, Response<List<Denuncia>> response) {
                 Log.i("onResponse", "sucesso ???");
                 atribuirDenuncias(response.body());
             }
 
             @Override
-            public void onFailure(Call<List<Denuncia>>  call, Throwable t) {
+            public void onFailure(Call<List<Denuncia>> call, Throwable t) {
                 Log.i("onFailure", "requisição falhou");
                 t.printStackTrace();
             }
@@ -73,8 +70,7 @@ public class AcompanharDenunciaActivity extends AppCompatActivity {
     private void atribuirDenuncias(List<Denuncia> lista) {
 
         RecyclerView listaDeDenuncias = findViewById(R.id.activity_acomp_denuncia_recycler_view);
-        List<Denuncia> denuncias = new ArrayList<>();
-        denuncias = lista;
+        List<Denuncia> denuncias = lista;
 
         configurarAdapter(listaDeDenuncias, denuncias);
     }

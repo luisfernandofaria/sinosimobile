@@ -74,8 +74,6 @@ public class DescricaoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Denuncia denuncia = (Denuncia) intent.getSerializableExtra("denuncia");
 
-        System.out.println(denuncia.getCategoria());
-
         EditText descricaoEdit = findViewById(R.id.activity_descricao_desc);
         descricaoEdit.setHorizontallyScrolling(false);
         descricaoEdit.setMaxLines(10);
