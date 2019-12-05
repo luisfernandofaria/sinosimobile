@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         botaoAcompanhar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                definirIntent(AcompanharDenunciaActivity.class);
+                Toast.makeText(getApplicationContext(), "Essa opção estará disponível em versões futuras!", Toast.LENGTH_LONG).show();
             }
         });
     }

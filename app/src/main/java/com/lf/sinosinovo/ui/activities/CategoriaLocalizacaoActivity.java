@@ -18,8 +18,9 @@ import com.lf.sinosinovo.model.Municipio;
 import com.lf.sinosinovo.retrofit.RetrofitConfig;
 import com.lf.sinosinovo.ui.adapters.ListaMunicipioAdapter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,11 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
     private ArrayAdapter spinnerAdapter;
     private List<String> listaCategorias;
     private List<Municipio> listaDeMunicipios;
+
+    EditText end;
+    EditText cep;
+    EditText lat;
+    EditText lng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +76,22 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
 
         LocalAcidente local = new LocalAcidente();
 
-        EditText lat = findViewById(R.id.activity_cat_loc_latitude);
+        lat = findViewById(R.id.activity_cat_loc_latitude);
         local.setLatitude(lat.getText().toString());
 
-        EditText lon = findViewById(R.id.activity_cat_loc_longitude);
-        local.setLongitude(lon.getText().toString());
+        EditText lng = findViewById(R.id.activity_cat_loc_longitude);
+        local.setLongitude(lng.getText().toString());
 
-        EditText end = findViewById(R.id.activity_cat_loc_endereco);
+        end = findViewById(R.id.activity_cat_loc_endereco);
         local.setEndereco(end.getText().toString());
 
         local.setMunicipio(pegarMunicipio());
 
         EditText cep = findViewById(R.id.activity_cat_loc_cep);
-        local.setCep(cep.getText().toString());
-
+        if (isCEP(cep)) {
+            local.setCep(cep.getText().toString());
+        }
         return local;
-
     }
 
     private void buscarMunicipios() {
@@ -109,6 +115,24 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
 
     private void popularSpinnerMunicipio(List<Municipio> lista) {
 
+        Collections.sort(lista, new Comparator<Municipio>() {
+
+            public int compare(Municipio m1, Municipio m2) {
+
+                String uf1 = m1.getUf();
+                String uf2 = m2.getUf();
+                int ufComp = uf1.compareTo(uf2);
+
+                if (ufComp != 0) {
+                    return ufComp;
+                }
+                String nome1 = m1.getNome();
+                String nome2 = m2.getNome();
+                return nome1.compareTo(nome2);
+            }
+        });
+
+
         listaDeMunicipios = lista;
 
         Spinner spinner = findViewById(R.id.activity_cat_loc_spinner_cidade);
@@ -127,9 +151,11 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
 
     private void vaiParaDescricao(Denuncia denuncia) {
 
-        Intent intent = new Intent(this, DescricaoActivity.class);
-        intent.putExtra("denuncia", denuncia);
-        startActivity(intent);
+        if (validarCampos()) {
+            Intent intent = new Intent(this, DescricaoActivity.class);
+            intent.putExtra("denuncia", denuncia);
+            startActivity(intent);
+        }
     }
 
     private void configurarBotaoAvancar() {
@@ -171,5 +197,68 @@ public class CategoriaLocalizacaoActivity extends AppCompatActivity {
     private void preencherListas() {
         listaCategorias = Arrays.asList(getResources().getStringArray(R.array.array_categorias));
     }
-}
 
+    private boolean validarCampos() {
+
+        if (isEmpty(end)) {
+            end.setError("Preencha pelo menos um nome de rua ou referência!");
+            end.requestFocus();
+            return false;
+        }
+
+        if (cep != null && !isCEP(cep)) {
+            cep.setError("Verifique o formato do CEP!");
+            cep.requestFocus();
+            return false;
+        }
+
+        if (lat != null && !isLatitudeValid(lat)) {
+            lat.setError("Verifique a latitude! (Graus e decimais do grau (DDDºDDDDD))");
+            lat.requestFocus();
+            return false;
+        }
+
+        if (lng != null && !isLongitudeValid(lng)) {
+            lng.setError("Verifique a longitude! (Graus e decimais do grau (DDDºDDDDD))");
+            lng.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean isEmpty(EditText editText) {
+        String input = editText.getText().toString().trim();
+        return input.length() == 0;
+    }
+
+    public boolean isLatitudeValid(EditText editText) {
+        if (!isEmpty(editText)) {
+            if (!editText.getText().toString().matches("^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$")) {
+                editText.setError("Verifique a latitude e/ou longitude!");
+                editText.requestFocus();
+            }
+        }
+        return true;
+    }
+
+    public boolean isLongitudeValid(EditText editText) {
+        if (!isEmpty(editText)) {
+            if (!editText.getText().toString().matches("^(\\\\+|-)?(?:180(?:(?:\\\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\\\.[0-9]{1,6})?))$")) {
+                editText.setError("Verifique a latitude e/ou longitude!");
+                editText.requestFocus();
+            }
+        }
+        return true;
+    }
+
+    public boolean isCEP(EditText editText) {
+        if (!isEmpty(editText)) {
+            if (!editText.getText().toString().matches("^(([0-9]{2}\\\\.[0-9]{3}-[0-9]{3})|([0-9]{2}[0-9]{3}-[0-9]{3})|([0-9]{8}))$")) {
+                editText.setError("Verifique o CEP!");
+                editText.requestFocus();
+            }
+        }
+        return true;
+    }
+}
